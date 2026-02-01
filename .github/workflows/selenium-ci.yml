@@ -34,7 +34,7 @@ jobs:
       - name: Setup Chromedriver
         uses: nanasess/setup-chromedriver@v1
         with:
-          chrome-version: stable
+          chrome-version: 117.0.5938.92
 
       # 5️⃣ Make gradlew executable
       - name: Make Gradlew executable
