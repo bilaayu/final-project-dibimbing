@@ -44,7 +44,7 @@ public class BaseTest {
         }
 
         driver.manage().window().maximize();
-        driver.get("https://lms-b2b.do.dibimbing.id/dibimbingqa/login");
+        driver.get(System.getProperty("base.url", "https://lms-b2b.do.dibimbing.id/dibimbingqa/login"));
     }
 
     @AfterMethod(alwaysRun = true)

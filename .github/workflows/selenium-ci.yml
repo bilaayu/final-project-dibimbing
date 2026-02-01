@@ -12,34 +12,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout code
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
+      # 2️⃣ Setup JDK 17
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          distribution: temurin
+          java-version: 17
           cache: gradle
 
+      # 3️⃣ Install Google Chrome
       - name: Setup Google Chrome
         run: |
           sudo apt update
           sudo apt install -y google-chrome-stable
 
-      - name: Make gradlew executable
+      # 4️⃣ Install Chromedriver
+      - name: Setup Chromedriver
+        uses: nanasess/setup-chromedriver@v1
+        with:
+          chrome-version: stable
+
+      # 5️⃣ Make gradlew executable
+      - name: Make Gradlew executable
         run: chmod +x ./gradlew
 
+      # 6️⃣ Run Gradle tests with secrets
       - name: Run Gradle tests
-        run: |
-          ./gradlew clean test \
+        run: ./gradlew clean test \
           -Dbase.url=${{ secrets.BASE_URL }} \
           -Demail=${{ secrets.EMAIL }} \
           -Dpassword=${{ secrets.PASSWORD }}
 
-      - name: Upload Test Report
+      # 7️⃣ Generate Allure report
+      - name: Generate Allure Report
+        run: ./gradlew allureReport
+
+      # 8️⃣ Upload Allure report as artifact
+      - name: Upload Allure Report
         uses: actions/upload-artifact@v4
         with:
-          name: test-report
-          path: build/reports/tests/test
-
+          name: allure-report
+          path: build/reports/allure-report
