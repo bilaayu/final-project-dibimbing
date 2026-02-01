@@ -12,13 +12,20 @@ public class ConfigReader {
             InputStream input = ConfigReader.class
                     .getClassLoader()
                     .getResourceAsStream("config/config.properties");
-            properties.load(input);
+            if (input != null) {
+                properties.load(input);
+            } else {
+                System.out.println("config.properties tidak ditemukan, gunakan system properties.");
+            }
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load config.properties");
+            throw new RuntimeException("Failed to load config.properties", e);
         }
     }
 
     public static String get(String key) {
-        return properties.getProperty(key);
+        String value = System.getProperty(key); // Ambil dari -Dkey=value dulu
+        if (value != null && !value.isEmpty()) return value;
+
+        return properties.getProperty(key); // fallback ke file lokal
     }
 }

@@ -15,7 +15,7 @@ public class EditEmployeeTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.NORMAL)
-    public void editEmployeeSuccess() throws InterruptedException {
+    public void editEmployeeSuccess() {
         WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(15));
 
         LoginPage loginPage = new LoginPage(driver);

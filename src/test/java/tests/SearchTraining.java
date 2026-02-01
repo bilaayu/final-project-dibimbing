@@ -16,7 +16,7 @@ public class SearchTraining extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.MINOR)
-    public void SearchTraining() throws InterruptedException {
+    public void SearchTraining() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         LoginPage loginPage = new LoginPage(driver);

@@ -14,7 +14,7 @@ public class DeleteEmployee extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.NORMAL)
-    public void DeleteEmployee() throws InterruptedException {
+    public void DeleteEmployee() {
             WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(15));
 
             LoginPage loginPage = new LoginPage(driver);

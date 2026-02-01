@@ -41,3 +41,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# Test config with credentials
+src/test/resources/config/config.properties

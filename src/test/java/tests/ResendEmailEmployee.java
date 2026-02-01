@@ -14,7 +14,7 @@ public class ResendEmailEmployee extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.MINOR)
-    public void ResendEmailEmployee() throws InterruptedException {
+    public void ResendEmailEmployee() {
         WebDriverWait wait = new WebDriverWait(driver, java.time.Duration.ofSeconds(15));
 
         LoginPage loginPage = new LoginPage(driver);

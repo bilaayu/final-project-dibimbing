@@ -8,6 +8,7 @@ on:
 
 jobs:
   test:
+    name: Run Automation Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -19,14 +20,26 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: gradle
 
-      - name: Install Google Chrome
+      - name: Setup Google Chrome
         run: |
           sudo apt update
           sudo apt install -y google-chrome-stable
 
-      - name: Grant execute permissions for Gradle wrapper
+      - name: Make gradlew executable
         run: chmod +x ./gradlew
 
       - name: Run Gradle tests
-        run: ./gradlew clean test
+        run: |
+          ./gradlew clean test \
+          -Dbase.url=${{ secrets.BASE_URL }} \
+          -Demail=${{ secrets.EMAIL }} \
+          -Dpassword=${{ secrets.PASSWORD }}
+
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: build/reports/tests/test
+

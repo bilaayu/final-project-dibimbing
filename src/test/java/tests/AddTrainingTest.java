@@ -19,7 +19,7 @@ public class AddTrainingTest extends BaseTest {
 
     @Test
     @Severity(SeverityLevel.CRITICAL)
-    public void addTrainingSuccess() throws InterruptedException {
+    public void addTrainingSuccess() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         LoginPage loginPage = new LoginPage(driver);
